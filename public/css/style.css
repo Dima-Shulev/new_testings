@@ -1,0 +1,91 @@
+.required:after{
+    content: '*';
+    color: red;
+}
+
+.testings{
+    font-family:"fantasy";
+    color: #1a1d20;
+    background-color: #c7dbd2;
+    border: 1px solid #a0aec0;
+    border-radius: 5px;
+    padding: 3px;
+    margin-bottom: 5px;
+}
+
+.testings:hover{
+    font-family:"fantasy";
+    color: #1a1d20;
+    background-color: #a0aec0;
+    border-radius: 5px;
+    padding: 3px;
+    margin-bottom: 5px;
+}
+.my_quest{
+    text-decoration: none;
+}
+.questions{
+    font-family:"fantasy";
+    color: #1a1d20;
+    background-color: #c7dbd2;
+    border: 1px solid #a0aec0;
+    border-radius: 5px;
+    padding: 3px;
+}
+.butHidden{
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+.answers{
+    display:none;
+    width:100%;
+    height:150px;
+    border:1px solid #a0aec0;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+#trueAnsDiv{
+    display:none;
+    height:150px;
+    border:1px solid #a0aec0;
+    border-radius: 6px;
+    color:#0f5132;
+    font-size: 18px;
+    padding: 5px;
+}
+#falseAnsDiv{
+    display:none;
+    height:150px;
+    border:1px solid #daa3b3;
+    border-radius: 6px;
+    color: #c73232;
+    font-size: 18px;
+    padding: 5px;
+}
+.checkLi{
+    display: flex;
+    flex-flow: row;
+    justify-content: start;
+    align-items: start;
+}
+.ulQuest{
+    padding-left: 20px;
+}
+
+.testSuccess{
+    background-color: #d2ecd2;
+    border:1px solid #a3aeb7;
+    border-radius: 6px;
+    color: #090e15;
+    padding: 5px;
+}
+.testFailure{
+    background-color: #dcb5b9;
+    border:1px solid #eaa3b5;
+    border-radius: 6px;
+    color:#051b11;
+    padding: 5px;
+}
