@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Providers;
 
 use Illuminate\Cache\RateLimiting\Limit;
@@ -44,5 +43,10 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         Paginator::useBootstrapFive();
+    }
+    public function configureRateLimiting(){
+        RateLimiter::for('api', function (Request $request) {
+            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+        });
     }
 }

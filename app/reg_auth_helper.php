@@ -1,5 +1,4 @@
 <?php
-
 use App\Mail\MailerClient;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -14,17 +13,17 @@ if(! function_exists('register')){
 
         if(!empty($request->avatar)){
             $path = Storage::disk('avatar')->putFile('',new File($request->avatar));
-            $linkImage = asset("storage/avatar/{$path}");
+            $linkImage = asset("avatar/{$path}");
         }else{
             $path = 'unknown.webp';
-            $linkImage = asset("storage/avatar/{$path}");
+            $linkImage = asset("avatar/{$path}");
         }
 
         $createUser = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
-            'active' => true,
+            'active' => 1,
             'status' => 'user',
             'avatar'=> $path,
             'created_at'=> date('Y-m-d H:i:s'),

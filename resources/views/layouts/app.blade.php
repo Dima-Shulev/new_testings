@@ -18,6 +18,7 @@
 <main>
     <div class="wrapper">
         <div class="container">
+
             @yield("content.page")
         </div>
     </div>

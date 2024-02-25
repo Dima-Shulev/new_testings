@@ -1,9 +1,9 @@
-@extends('layouts.main')
+@extends('layouts.app')
 @section('title.page'){{ __("Результат тестирования:") }}@endsection
 @section('content.page')
-    <x-title-post>
+    <x-form.title-post>
         {{__('Результат тестирования:')}}
-    </x-title-post>
+    </x-form.title-post>
    @isset($yesPassed)
     <div class="testSuccess">
         <h5>{{__('Ваш результат: ')}}</h5>
@@ -21,5 +21,5 @@
     </div>
    @endisset
    @php(session()->forget('result'))
-   <a href="{{route('testing')}}">{{__('Попробовать еще раз')}}</a>
+   <a href="{{route('category')}}">{{__('Попробовать еще раз')}}</a>
 @endsection

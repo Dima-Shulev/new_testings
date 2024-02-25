@@ -1,62 +1,50 @@
-<x-card class="card mb-3">
-             <x-card-header>
-                 <x-card-title>
+<x-card.card class="card mb-3">
+             <x-card.card-header>
+                 <x-card.card-title>
                  {{ __('Регистрация') }}
-                 </x-card-title>
-
+                 </x-card.card-title>
               <x-slot name="right">
                   <a href="{{ route('login') }}">{{__('Вход')}}</a>
               </x-slot>
-
-             </x-card-header>
-
-             <x-card-body>
-                 <x-form action="{{ route('register.store')}}" method="post" enctype="multipart/form-data">
-                     <x-form-item>
-                         <x-label required>
+             </x-card.card-header>
+             <x-card.card-body>
+                 <x-form.form action="{{ route('register.store')}}" method="post" enctype="multipart/form-data">
+                     <x-form.form-item>
+                         <x-form.label required>
                              {{ __('Имя или логин') }}
-                         </x-label>
-                         <x-input type="text" name="name" value="{{ old('name') }}" autofocus />
-                     </x-form-item>
-
-                     <x-form-item>
-                         <x-label required>
+                         </x-form.label>
+                         <x-form.input type="text" name="name" value="{{ old('name') }}" autofocus />
+                     </x-form.form-item>
+                     <x-form.form-item>
+                         <x-form.label required>
                              {{ __('Email') }}
-                         </x-label>
-                         <x-input type="email" name="email" value="{{ old('email') }}"/>
-                     </x-form-item>
-
-                     <x-form-item>
-                         <x-label required>
+                         </x-form.label>
+                         <x-form.input type="email" name="email" value="{{ old('email') }}"/>
+                     </x-form.form-item>
+                     <x-form.form-item>
+                         <x-form.label required>
                              {{ __('Пароль') }}
-                         </x-label>
-                         <x-input type="password" name="password" />
-                     </x-form-item>
-
-                     <x-form-item>
-                         <x-label required>
+                         </x-form.label>
+                         <x-form.input type="password" name="password" />
+                     </x-form.form-item>
+                     <x-form.form-item>
+                         <x-form.label required>
                              {{ __('Пароль еще раз') }}
-                         </x-label>
-                         <x-input type="password" name="password_confirmation"  />
-                     </x-form-item>
-
-                     <x-form-item>
-                         <x-label>
+                         </x-form.label>
+                         <x-form.input type="password" name="password_confirmation"  />
+                     </x-form.form-item>
+                     <x-form.form-item>
+                         <x-form.label>
                              {{ __('Ваш аватар:') }}
-                         </x-label>
-                         <x-input type="file" name="avatar" accept="image/png, image/jpeg, image/giv, image/png, image/webp" />
-                     </x-form-item>
-
-
-
-                     <x-form-item>
+                         </x-form.label>
+                         <x-form.input type="file" name="avatar" accept="image/png, image/jpeg, image/giv, image/png, image/webp" />
+                     </x-form.form-item>
+                     <x-form.form-item>
                          <x-login.checkbox-reg name="politic" value="1" id="politic">
                              {{ __('Я согласен на обработку моих персональных данных') }}
                          </x-login.checkbox-reg>
-                     </x-form-item>
-                     <x-button type="submit" {{--color="success" size="sm"--}}>{{ __('Зарегистрироваться') }}</x-button>
-                 </x-form>
-
-             </x-card-body>
-
-</x-card>
+                     </x-form.form-item>
+                     <x-form.button type="submit" {{--color="success" size="sm"--}}>{{ __('Зарегистрироваться') }}</x-form.button>
+                 </x-form.form>
+             </x-card.card-body>
+</x-card.card>

@@ -17,11 +17,11 @@ class TestingController extends Controller
         session()->put('result', 0);
         $test = Testing::find((int)$id)->first();
         if (isset($yesPassed)) {
-            return view('testings.show',['id'=>$id,compact('test', 'yesPassed')]);
+            return view('all.testings.show',['id'=>$id,compact('test', 'yesPassed')]);
         } else if (isset($notPassed)) {
-            return view('testings.show', compact('test', 'notPassed'));
+            return view('all.testings.show', compact('test', 'notPassed'));
         } else {
-            return view('testings.show', compact('test'));
+            return view('all.testings.show', compact('test'));
         }
     }
 
@@ -37,11 +37,11 @@ class TestingController extends Controller
 
         if ((int)$math->passing_score <= (int)$percent) {
             $yesPassed .= $percent . "%";
-            return view('testings.result', compact('yesPassed','percentGo'));
+            return view('all.testings.result', compact('yesPassed','percentGo'));
 
         } else if ((int)$math->passing_score > (int)$percent) {
             $notPassed .= $percent . "%";
-            return view('testings.result', compact('notPassed','percentGo'));
+            return view('all.testings.result', compact('notPassed','percentGo'));
         }
     }
 }

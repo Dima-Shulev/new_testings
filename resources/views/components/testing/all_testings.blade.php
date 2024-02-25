@@ -3,7 +3,7 @@
 @else
     <div class="row">
         @foreach($allTestings as $test)
-                    <a href="{{route('testing.show',['id'=>$test->id])}}">
+                    <a href="{{route('question',['id'=>$test->id])}}">
                             <h2 class="h4">{{$test->name_test}}</h2>
                     </a>
         @endforeach

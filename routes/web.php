@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\All\CategoryController;
 use App\Http\Controllers\All\LoginController;
 use App\Http\Controllers\All\PageController;
@@ -8,13 +7,13 @@ use App\Http\Controllers\All\RegisterController;
 use App\Http\Controllers\All\TestingController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
+use Couchbase\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/',[PageController::class,'index'])->name('home');
 Route::get('/{url}',[PageController::class,'show'])->name('show');
-
-
 
 Route::get('/email/verify', function () {
     if(Auth::user()->email_verified_at){
@@ -43,20 +42,16 @@ Route::middleware('guest')->group(function() {
     Route::post('/login/check', [LoginController::class, 'checkCode'])->name('login.check-code');
     Route::get('/login/change/{id}', [LoginController::class, 'change'])->name('login.change');
     Route::post('/login/change', [LoginController::class, 'changePass'])->name('login.changePass');
-
     Route::get('/category', [CategoryController::class, 'index'])->name('category');
     Route::get('/category/{url}', [CategoryController::class, 'show'])->name('categories.show');
 
     Route::prefix('testing')->group(function() {
         Route::get('/', [TestingController::class, 'index'])->name('testing');
         Route::get('/{id}/show', [TestingController::class, 'show'])->name('testing.show');
-
         Route::get('/{id}/question', [QuestionController::class, 'index'])->name('question');
         Route::get('/{id}/question/{questId}', [QuestionController::class, 'show'])->name('question.show');
         Route::post('/{id}/question/{questId}', [QuestionController::class, 'store'])->name('question.store');
         Route::get('/{id}/result/{count}', [TestingController::class, 'result'])->name('testing.result');
     });
-
-
 
 });

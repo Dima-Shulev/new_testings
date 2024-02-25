@@ -1,9 +1,9 @@
-@extends('layouts.main')
+@extends('layouts.auth')
 @section('title.page'){{__('Пополнить баланс')}}@endsection
-@section('content.page')
-    <x-title>
+@section('auth.content')
+    <x-form.title>
         {{__('Пополнить баланс')}}
-    </x-title>
+    </x-form.title>
     <p>Извините, но данный раздел в процессе разработки!</p>
 @endsection
 

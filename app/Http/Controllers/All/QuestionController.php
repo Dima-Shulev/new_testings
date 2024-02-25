@@ -11,13 +11,13 @@ class QuestionController extends Controller
         public function index($id){
             $count = Question::where('testing_id',$id)->count('id');
             $allQuestionsTest = Question::select(['id','title','testing_id'])->where('testing_id',$id)->get();
-            return view('questions.index',compact('allQuestionsTest','count'));
+            return view('all.questions.index',compact('allQuestionsTest','count'));
         }
 
         public function show($id, $questId)
         {
             $getQuest = Question::where("testing_id", (int)$id)->where('id', $questId)->first();
-            return view('questions.show',compact('getQuest'));
+            return view('all.questions.show',compact('getQuest'));
         }
 
         public function store(Request $request){
@@ -34,18 +34,10 @@ class QuestionController extends Controller
                     session()->increment('result');
                 }
            }
-
             if($end->id != $getQuest->id){
                 return redirect()->route('question.show',['id'=>(int)$request->id,'questId'=>(int)$request->questId+1]);
             }else{
                 return redirect()->route('testing.result',['id'=>(int)$request->id,'count'=>(int)$count]);
             }
         }
-
-
-
-
-
-
-
 }
