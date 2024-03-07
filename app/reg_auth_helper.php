@@ -24,6 +24,7 @@ if(! function_exists('register')){
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
             'active' => 1,
+            'pay'=> 'no',
             'status' => 'user',
             'avatar'=> $path,
             'created_at'=> date('Y-m-d H:i:s'),
@@ -35,7 +36,6 @@ if(! function_exists('register')){
                 ->first();
             Auth::login($createUser);
             session_user($user,'session_user',$linkImage);
-            //return redirect()->route('home')->with('success', 'register');
         }
             event(new Registered($createUser));
             return redirect()->route('verification.notice');
@@ -47,7 +47,7 @@ if(! function_exists('register')){
                 if ($login->active == true) {
                     if ($login->status === 'user') {
                         if (Hash::check($request->input('password'), $login->password)) {
-                            $linkAvatar = asset("storage/avatar/{$login->avatar}");
+                            $linkAvatar = asset("avatar/{$login->avatar}");
                             session_user($login, 'session_user',$linkAvatar);
                             Auth::login($login);
                             return redirect()->route('auth.room')->with('success', 'entrance');

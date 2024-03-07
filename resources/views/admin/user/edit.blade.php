@@ -46,6 +46,12 @@
                 </x-form.label>
                 <x-login.select-status class="mb-3 ms-2" name='status' value="user">{{ $users->status }}</x-login.select-status>
             </x-card.card-body>
+            <x-card.card-body>
+                <x-form.label class="mb-2">
+                    <b>{{__('Pay:')}}</b>
+                </x-form.label>
+                <x-login.select-pay class="mb-3 ms-2" name='pay' value="no">{{ $users->pay }}</x-login.select-pay>
+            </x-card.card-body>
             <x-form.button type='submit' name="saveUpdate" class="mt-2">{{__("Сохранить")}}</x-form.button>
         </x-form.form>
     </x-card.card>

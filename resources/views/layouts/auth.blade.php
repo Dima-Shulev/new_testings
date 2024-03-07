@@ -12,17 +12,15 @@
     <title>@yield('title.page', config('app.name'))</title>
 </head>
 <body>
-<div class="d-flex flex-column justify-content-between min-vh-100">
+<div class="d-flex flex-column justify-content-start align-items-start min-vh-100 w-100">
     @include('all.modules.menu')
-    @include('message.message')
-    <main>
+    <main class="w-100 m-2 p-2">
         <div class="wrapper">
-            <div class="container mt-5 pt-3">
-                        <div class="row">
-                            <div class="col-12 col-md-6 offset-md-3">
-                                @yield('auth.content')
-                            </div>
-                        </div>
+            <div class="mt-5">
+                @include('message.message')
+            </div>
+            <div class="container">
+                   @yield('auth.content')
             </div>
         </div>
     </main>

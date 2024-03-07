@@ -16,7 +16,6 @@
                 <td><b>{{__('Статус:')}}</b></td>
                 <td><b>{{__('Действие:')}}</b></td>
             </tr>
-
             @foreach($categories as $category)
                 <tr>
                     <td>{{$category->id}}</td>
@@ -24,9 +23,15 @@
                     <td>{{$category->created_at}}</td>
                     <td>{{$category->active}}</td>
                     <td>
-                        <a href="{{route('admin.categories.publicCategory',[$category->id,$category->active])}}" class="btn btn-sm btn-{{$category->active == 1 ? 'success': 'danger'}} mb-1 me-1">{{$category->active == 1?'On':'Off'}}</a>
-                        <a href="{{route('admin.categories.edit',['url' => $category->url])}}" class="btn btn-sm btn-primary mb-1">{{__('Редактировать')}}</a>
-                        <a href="{{route('admin.categories.delete',['id' => $category->id])}}" class="btn btn-sm btn-danger mb-1">{{__('Удалить')}}</a>
+                        <div class="d-flex justify-content-start">
+                            <a href="{{route('admin.categories.publicCategory',[$category->id,$category->active])}}" class="btn btn-sm btn-{{$category->active == 1 ? 'success': 'danger'}} mb-1 me-1">{{$category->active == 1?'On':'Off'}}</a>
+                            <a href="{{route('admin.categories.edit',['url' => $category->url])}}" class="btn btn-sm btn-primary mb-1 me-1">{{__('Редактировать')}}</a>
+                            <form action="{{route('admin.categories.delete',['id' => $category->id])}}" method="post">
+                            @csrf
+                                <input name="_method" type="hidden" value="DELETE">
+                                <button type="submit" name="deleteCategory" class="btn btn-sm btn-danger mb-1">{{__('Удалить')}}</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             @endforeach

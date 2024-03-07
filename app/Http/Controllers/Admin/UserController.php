@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -14,7 +13,7 @@ class UserController extends Controller
     }
 
     public function edit($id){
-        $users = User::select(['id','name','email','status','password','created_at','balance'])->where('id',(int)$id)->orderBy('created_at','desc')->first();
+        $users = User::select(['id','name','email','status','password','created_at','balance','pay'])->where('id',(int)$id)->orderBy('created_at','desc')->first();
         return view('admin.user.edit', compact('users'));
     }
 

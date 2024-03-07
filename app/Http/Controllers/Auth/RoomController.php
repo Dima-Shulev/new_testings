@@ -1,14 +1,14 @@
 <?php
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Requests\ValidEditRequest;
+use App\Http\Requests\Auth\ValidEditRequest;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 
 class RoomController extends Controller
 {
     public function index(){
-        $id = User::select(['id','name'])->where('name',session('name'))->where('id',session('id'))->first();
+        $id = User::select(['id','name'])->where('id',session('id'))->first();
         return view('auth.room.index',compact('id'));
     }
 

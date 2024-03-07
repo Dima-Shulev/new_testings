@@ -19,7 +19,7 @@ Route::prefix('admin')->middleware('adminPanel')->group(function () {
             Route::get('/{id}/active/{active}', 'publicUser')->name('admin.users.publicUser');
             Route::get('/{id}/edit', 'edit')->name('admin.users.edit');
             Route::post('/{id}/edit', 'update')->name('admin.users.update');
-            Route::get('/{id}', 'delete')->name('admin.users.delete');
+            Route::delete('/{id}', 'delete')->name('admin.users.delete');
         });
     });
 
@@ -31,7 +31,7 @@ Route::prefix('admin')->middleware('adminPanel')->group(function () {
             Route::get('/{url}/edit','edit')->name('admin.pages.edit');
             Route::post('/{id}','update')->name('admin.pages.update');
             Route::get('/{id}/active/{active}','publicPage')->name('admin.pages.publicPage');
-            Route::get('/{id}/deletePage','deletePage')->name('admin.pages.delete');
+            Route::delete('/{id}/deletePage','deletePage')->name('admin.pages.delete');
         });
     });
 
@@ -43,7 +43,7 @@ Route::prefix('admin')->middleware('adminPanel')->group(function () {
             Route::get('/{url}/edit', 'edit')->name('admin.categories.edit');
             Route::post('/{id}', 'update')->name('admin.categories.update');
             Route::get('/{id}/active/{active}', 'publicCategory')->name('admin.categories.publicCategory');
-            Route::get('/{id}/deleteCategory', 'deleteCategory')->name('admin.categories.delete');
+            Route::delete('/{id}/deleteCategory', 'deleteCategory')->name('admin.categories.delete');
         });
     });
 
@@ -52,12 +52,10 @@ Route::prefix('admin')->middleware('adminPanel')->group(function () {
             Route::get('/', 'index')->name('admin.testing');
             Route::get('/create', 'create')->name('admin.testing.create');
             Route::post('/', 'store')->name('admin.testing.store');
-
-
             Route::get('/{id}/edit', 'edit')->name('admin.testing.edit');
             Route::post('/{id}', 'update')->name('admin.testing.update');
             Route::get('/{id}/active/{active}', 'publicTesting')->name('admin.testing.public');
-            Route::get('/{id}/destroy', 'destroy')->name('admin.testing.destroy');
+            Route::delete('/{id}/destroy', 'destroy')->name('admin.testing.destroy');
         });
         Route::get('/howQuestion', function () {
             return view('admin.testing.create');

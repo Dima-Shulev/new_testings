@@ -26,7 +26,11 @@
                         <div class="d-flex justify-content-start">
                             <a href="{{route('admin.users.publicUser',[$user->id,$user->active])}}" class="btn btn-sm btn-{{$user->active == 1 ? 'success':'danger'}} mb-1 me-1">{{$user->active == 1?'On':'Off'}}</a>
                             <a href="{{route('admin.users.edit',['id' => $user->id])}}" class="btn btn-sm btn-primary mb-1 me-1">{{__('Редактировать')}}</a>
-                            <a href="{{route('admin.users.delete',['id' => $user->id])}}" class="btn btn-sm btn-danger mb-1 me-1">{{__('Удалить')}}</a>
+                            <form action="{{route('admin.users.delete',['id' => $user->id])}}" method="post">
+                                @csrf
+                                <input name="_method" type="hidden" value="DELETE">
+                                <button type="submit" name="deleteUser" class="btn btn-sm btn-danger mb-1">{{__('Удалить')}}</button>
+                            </form>
                         </div>
                     </td>
                 </tr>

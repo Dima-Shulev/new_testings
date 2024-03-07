@@ -2,7 +2,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ValidateCategory;
+
+use App\Http\Requests\Admin\ValidateCategory;
 use App\Models\Question;
 use App\Models\Category;
 

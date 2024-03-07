@@ -37,7 +37,7 @@
                          <x-form.label>
                              {{ __('Ваш аватар:') }}
                          </x-form.label>
-                         <x-form.input type="file" name="avatar" accept="image/png, image/jpeg, image/giv, image/png, image/webp" />
+                         <x-form.input type="file" name="avatar" />
                      </x-form.form-item>
                      <x-form.form-item>
                          <x-login.checkbox-reg name="politic" value="1" id="politic">

@@ -24,14 +24,23 @@
     @case($slot == 'error_update_article')
     {{ __('Упс. Ошибка при обновлении статьи !') }}
     @break
+    @case($slot == 'error_create_testing')
+    {{ __('Упс. Ошибка при создании теста !') }}
+    @break
+    @case($slot == 'error_update_testing')
+    {{ __('Упс. Ошибка при обновлении теста !') }}
+    @break
     @case($slot == 'error_create_article')
     {{ __('Упс. Ошибка при создании статьи !') }}
+    @break
+    @case($slot == 'error_create_page')
+    {{ __('Упс. Ошибка при создании страницы !') }}
     @break
     @case($slot == 'error_update_page')
     {{ __('Упс. Ошибка при обновлении страницы !') }}
     @break
     @case($slot == 'error_user_status')
-            {{ __('Упс. Ошибка неверный статус !') }}
+    {{ __('Упс. Ошибка неверный статус !') }}
     @break
     @endswitch
 </div>

@@ -18,6 +18,7 @@ class Testing extends Model
         'time',
         'created_at',
         'active',
+        'show_answers',
         'categories_id',
         'user_id'
         ];

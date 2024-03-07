@@ -24,7 +24,15 @@
         @case($slot == 'create_article')
         {{ __('Поздравляю. Вы создали статью !') }}
         @break
-
+        @case($slot == 'create_testing')
+        {{ __('Поздравляю. Вы создали новый тест !') }}
+        @break
+        @case($slot == 'update_testing')
+        {{ __('Поздравляю. Вы обновили тест !') }}
+        @break
+        @case($slot == 'create_page')
+        {{ __('Поздравляю. Вы создали новую страницу !') }}
+        @break
         @case($slot == 'create_review')
         {{ __('Большое спасибо за Ваш отзыв !') }}
         @break

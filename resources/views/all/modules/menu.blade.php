@@ -21,5 +21,6 @@
           <button class="btn btn-outline-success me-1 mb-1" type="submit">{{__('Поиск')}}</button>
        </form>
     </div>
+   </div>
   </nav>
 </header>

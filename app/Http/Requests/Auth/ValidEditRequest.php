@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\File;
 
-class ValidTesting extends FormRequest
+class ValidEditRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,14 +23,13 @@ class ValidTesting extends FormRequest
     public function rules(): array
     {
         return [
-            'name_test'=> ['required','string'],
-            'content' => ['required','string'],
-            'questions' => ['required'],
-            'trueAnswers' =>['required'],
-            'falseAnswers' => ['required'],
-            'passing_score' => ['nullable','string'],
-            'description' => ['required'],
-            'created_at' => ['nullable','data']
+            'name' => ['required','min:2','max:50','string'],
+            'email' => ['required','email','string','min:10','max:50'],
+            'id' => ['nullable'],
+            'avatar' => ['nullable','image',File::image()
+                ->min('1kb')
+                ->max('10000000kb')
+            ]
         ];
     }
 }

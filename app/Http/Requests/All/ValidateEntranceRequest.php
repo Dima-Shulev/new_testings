@@ -26,10 +26,11 @@ class ValidateEntranceRequest extends FormRequest
 
         return [
             'email' => ['required','email','min:10','max:100'],
-            'password' => ['required', Password::min(8)
-                ->mixedCase()
+            'password' => ['required', 'min:8'],
+                /*Password::min(8)*/
+               /* ->mixedCase()
                 ->numbers()
-                ->symbols()],
+                ->symbols()],*/
             'remember' => ['nullable','string'],
         ];
     }

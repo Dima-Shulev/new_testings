@@ -32,7 +32,8 @@ class ValidUserRequest extends FormRequest
                 ->uncompromised()],*/
             'status' => ['required','string'],
             'created_at' => ['required'],
-            'balance' => ['required','int']
+            'balance' => ['required','int'],
+            'pay' => ['required','string']
         ];
     }
 }

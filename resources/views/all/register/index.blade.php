@@ -2,5 +2,9 @@
 @section('title.block',"Страница входа")
 @section('auth.content')
     <x-errorsAndMessage.errors-any/>
-    <x-login.card-register />
+    <div class="row">
+        <div class="col-12 col-md-6 offset-md-3">
+            <x-login.card-register />
+        </div>
+    </div>
 @endsection

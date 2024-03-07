@@ -7,13 +7,23 @@
         @php($allCategories = $category = \App\Models\Category::orderBy('id','ASC')->get())
         <x-category.all_categories :allCategories="$allCategories"/>
     @endif
-    <div>
         @if(isset($searchTesting))
-            @foreach($searchTesting as $item)
-                <a href="{{route('question',$item->id)}}">{{$item->name_test}}</a>
-            @endforeach
+            <div class="LC m-1 p-1">
+            <h2>{{__('Результаты поиска')}}</h2>
+            <hr>
+            @if(count($searchTesting) > 0)
+                @foreach($searchTesting as $item)
+                <div class="mb-2 p-1">
+                    <a href="{{route('question',$item->id)}}">{{$item->name_test}}</a>
+                </div>
+                @endforeach
+                @else
+                    <div class="mb-2 p-1">
+                        <p>{{__('Ничего не найдено')}}</p>
+                    </div>
+                @endif
+            </div>
         @endif
-    </div>
     <div>{{$show->content}}</div>
 @endsection
 

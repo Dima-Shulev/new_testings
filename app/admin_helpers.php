@@ -32,7 +32,7 @@ if(! function_exists('create_category')) {
                 'metaDescription' => $result['metaDescription'],
                 'created_at' => new Carbon($result['created_at']),
                 'user_id' => 1,
-                'active' => $result['checkPublic'],
+                'active' => 1,
                 'url' => name_url($result)
             ]);
 
@@ -226,6 +226,7 @@ if(! function_exists('update_user')) {
             $query->password = Hash::make($result['password']);
             $query->created_at = $result['created_at'];
             $query->balance = $result['balance'];
+            $query->pay = $result['pay'];
             $query->status = $result['status'];
             $query->save();
 
@@ -243,17 +244,18 @@ if(! function_exists('update_user')) {
         }
     }
 
-
     if(!function_exists('create_testing')){
-        function create_testing($request){
+        function create_testing($request, $id = ''){
 
             $count = count($request["questions"]);
             if(!isset($request['created_at']) || $request['created_at'] == null) $request['created_at'] = date("Y-m-d H:i:s");
             if(!isset($request['passing_score']) || $request['passing_score'] == null) $request['passing_score'] =  "50";
             if(!isset($request['metaDescription']) || $request['metaDescription'] == null) $request['metaDescription'] =  "null";
             if(!isset($request['metaKey']) || $request['metaKey'] == null) $request['metaKey'] =  "null";
-            if(!isset($request['time']) || $request['time'] == null) $request['time'] =  0;
+            $show_answers = !isset($request['show_answers'])?"off":$request['show_answers'];
+            $time = !isset($request['time']) ? 0 : $request['time'];
 
+        try {
             $test_id = Testing::create([
                 'name_test' => (string)$request["name_test"],
                 'content' => (string)$request["name_test"],
@@ -262,24 +264,36 @@ if(! function_exists('update_user')) {
                 'metaKey' => (string)$request['metaKey'],
                 'created_at' => (string)$request['created_at'],
                 'active' => 1,
-                'user_id' => 1,
+                'show_answers' => $show_answers,
+                'time' => $time,
+                'user_id' => $id = ($id === '') ? 1 : $id,
                 'categories_id' => $request['category']
             ]);
 
-            for($i=0; $i<$count; $i++){
+            for ($i = 0; $i < $count; $i++) {
                 Question::create([
                     'title' => $request['questions'][$i],
                     'trueAnswers' => $request['trueAnswers'][$i],
                     'falseAnswers' => $request['falseAnswers'][$i],
-                    'allAnswers' => $request['trueAnswers'][$i].",".$request['falseAnswers'][$i],
+                    'allAnswers' => $request['trueAnswers'][$i] . "," . $request['falseAnswers'][$i],
                     'description' => $request['description'][$i],
                     'metaKey' => $request['questions'][$i],
                     'metaDescription' => $request['questions'][$i],
                     'testing_id' => $test_id->id
                 ]);
             }
-
-            return redirect()->route('admin.testing')->with('success','create_testing');
+            if ($id === 1) {
+                return redirect()->route('admin.testing')->with('success', 'create_testing');
+            } else {
+                return redirect()->route('auth.testing', $id)->with('success', 'create_testing');
+            }
+        }catch(Exception $e){
+            if ($id === 1) {
+                return redirect()->route('admin.testing')->with('errors', 'error_create_testing');
+            } else {
+                return redirect()->route('auth.testing', $id)->with('errors', 'error_create_testing');
+            }
+        }
         }
     }
 
@@ -287,38 +301,52 @@ if(! function_exists('update_user')) {
         function update_testing($result, $id){
             $count = Question::where('testing_id',(int)$id)->count('id');
             $idQuest = Question::select('id')->where('testing_id',(int)$id)->orderBy('id','ASC')->get();
+            $show_answers = !isset($result['show_answers'])?"off":$result['show_answers'];
+            $time = !isset($request['time']) ? 0 : $request['time'];
 
-            if($result){
+            if ($result) {
                 $update = Testing::find((int)$id);
                 $update->name_test = $result['name_test'];
                 $update->content = $result['content'];
                 $update->passing_score = $result['passing_score'];
                 $update->active = 0;
+                $update->time = $time;
+                $update->show_answers = $show_answers;
                 $update->created_at = new Carbon($result['created_at']);
                 $update->user_id = 1;
                 $update->save();
 
                 session()->forget('session_admin');
                 $session = session();
-                $session->put('session_admin','session_auth');
-                $session->put('name',$result['name_test']);
+                $session->put('session_admin', 'session_auth');
+                $session->put('name', $result['name_test']);
 
-                for($i=0; $i<$count; $i++){
-                    Question::where('title',$result['questions'][$i])->orWhere('id',$idQuest[$i]->id)->update([
+                for ($i = 0; $i < $count; $i++) {
+                    Question::where('title', $result['questions'][$i])->orWhere('id', $idQuest[$i]->id)->update([
                         'title' => $result['questions'][$i],
                         'trueAnswers' => $result['trueAnswers'][$i],
                         'falseAnswers' => $result['falseAnswers'][$i],
-                        'allAnswers' => $result['trueAnswers'][$i].",".$result['falseAnswers'][$i],
+                        'allAnswers' => $result['trueAnswers'][$i] . "," . $result['falseAnswers'][$i],
                         'description' => $result['description'][$i],
                         'testing_id' => $id
                     ]);
                 }
-
-                return redirect()->route('admin.testing')->with('success','update_testing');
-            }else{
-                return redirect()->route('admin.testing.edit')->with('error','error_update_testing');
+                return redirect()->route('admin.testing')->with('success', 'update_testing');
+            } else {
+                return redirect()->route('admin.testing.edit')->with('error', 'error_update_testing');
             }
         }
     }
 
+    if(! function_exists('show_answers')) {
+        function show_answers($test_id){
+               $show = Testing::select(['id','show_answers'])->where('id',$test_id)->first();
+                if($show->show_answers === "on"){
+                    $show_answers = true;
+                }else{
+                    $show_answers = false;
+                }
+           return $show_answers;
+        }
+    }
 }

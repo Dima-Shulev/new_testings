@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ValidatePageRequest;
+use App\Http\Requests\Admin\ValidatePageRequest;
 use App\Models\Page;
 
 class PageController extends Controller
@@ -14,7 +14,6 @@ class PageController extends Controller
    }
 
     public function create(){
-        /*$modules = Module::select(['id','name','position','active'])->get();*/
         return view('admin.pages.create');
     }
 

@@ -21,9 +21,15 @@
                         <td>{{$page->created_at}}</td>
                         <td>{{$page->active}}</td>
                         <td>
-                            <a href="{{route('admin.pages.publicPage',[$page->id,$page->active])}}" class="btn btn-sm btn-{{$page->active == 1 ? 'success': 'danger'}} mb-1 me-1">{{$page->active == 1?'On':'Off'}}</a>
-                            <a href="{{route('admin.pages.edit',['url' => $page->url])}}" class="btn btn-sm btn-primary mb-1">{{__('Редактировать')}}</a>
-                            <a href="{{route('admin.pages.delete',$page->id)}}" class="btn btn-sm btn-danger mb-1">{{__('Удалить')}}</a>
+                            <div class="d-flex justify-content-start">
+                                <a href="{{route('admin.pages.publicPage',[$page->id,$page->active])}}" class="btn btn-sm btn-{{$page->active == 1 ? 'success': 'danger'}} mb-1 me-1">{{$page->active == 1?'On':'Off'}}</a>
+                                <a href="{{route('admin.pages.edit',['url' => $page->url])}}" class="btn btn-sm btn-primary mb-1 me-1">{{__('Редактировать')}}</a>
+                                <form action="{{route('admin.pages.delete',$page->id)}}" method="post">
+                                @csrf
+                                    <input name="_method" type="hidden" value="DELETE">
+                                    <button type="submit" name="deletePage" class="btn btn-sm btn-danger mb-1">{{__('Удалить')}}</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
