@@ -12,19 +12,17 @@
     <title>@yield('title.page', config('app.name'))</title>
 </head>
 <body>
-<div class="d-flex flex-column justify-content-center align-items-center min-vh-100">
+<div class="d-flex flex-column justify-content-between align-items-center min-vh-100">
     @include('all.modules.menu')
     @include('message.message')
-<main class="main_content m-2 p-2">
+<main class="main_content mt-5 p-3">
     <div class="wrapper">
         <div class="container">
             @yield("content.page")
         </div>
     </div>
 </main>
-
 @include('all.modules.footer')
-
 </div>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 </body>

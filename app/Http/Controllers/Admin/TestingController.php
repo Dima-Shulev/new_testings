@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Handler\AdminHandler;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\All\ValidTestingRequest;
 use App\Models\Category;
@@ -15,7 +16,7 @@ class TestingController extends Controller
      */
     public function index()
     {
-        $testings = page_paginate(5,Testing::class);;
+        $testings = AdminHandler::pagePaginate(5,Testing::class);;
         return view('admin.testing.index',compact('testings'));
     }
 
@@ -36,17 +37,20 @@ class TestingController extends Controller
      */
     public function store(ValidTestingRequest $request)
     {
-        return create_testing($request);
+        return AdminHandler::createTesting($request);
     }
     /**
      * Show the form for editing the specified resource
      */
     public function edit(string $id)
     {
+        $categories = Category::select(['id','name'])->orderBY('id','ASC')->get();
         $testing = Testing::select(['id', 'name_test', 'content', 'passing_score', 'created_at', 'user_id','show_answers','time'])->where('id', (int)$id)->first();
+        if($testing == null) {return abort(404);}
         $questions = Question::where('testing_id', (int)$id)->get();
+        if($questions == null) {return abort(404);}
         $count = Question::where('testing_id', (int)$id)->count('id');
-        return view('admin.testing.edit',compact('testing','questions','count'));
+        return view('admin.testing.edit',compact('testing','questions','count','categories'));
     }
     /**
      * Update the specified resource in storage.
@@ -54,12 +58,12 @@ class TestingController extends Controller
     public function update(ValidTestingRequest $request, string $id)
     {
         $result = $request->validated();
-        return update_testing($result, $id);
+        return AdminHandler::updateTesting($result, $id);
     }
 
 
     public function publicTesting($id, $active){
-        public_item($id, $active,Testing::class);
+        AdminHandler::publicItem($id, $active,Testing::class);
         return redirect()->route('admin.testing');
     }
 

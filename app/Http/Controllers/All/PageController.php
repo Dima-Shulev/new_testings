@@ -2,10 +2,10 @@
 namespace App\Http\Controllers\All;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Page;
-use App\Models\Question;
 use App\Models\Testing;
+use App\Models\Question;
+use App\Models\Category;
 use GuzzleHttp\Psr7\Request;
 
 class PageController extends Controller
@@ -22,6 +22,7 @@ class PageController extends Controller
                 $response = strtolower(str_replace(" ",'',trim(htmlspecialchars($response))));
                 $show = Page::select(['id', 'name', 'content', 'metaKey', 'metaDescription', 'url'])->where('url', $url)->orderBy('id', 'ASC')->first();
                 $searchTesting = Testing::where('name_test','like', "%{$response}%")->orWhere('content','like', "%{$response}%")->get();
+
                 if ($searchTesting) {
                     return view('all.show', compact('show', 'searchTesting'));
                 }

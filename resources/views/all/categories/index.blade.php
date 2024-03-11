@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('title.page'){{__('Все категории')}}@endsection
+@section('keywords.page'){{__('Все категории')}}@endsection
+@section('description.page'){{__('Все категории тестов')}}@endsection
+@section('title.page'){{__('Все категории тестов')}}@endsection
 @section('content.page')
-    <x-form.title-post>
-        {{__('Все категории')}}
-    </x-form.title-post>
+       <b>{{__('Все категории')}}</b>
 @endsection

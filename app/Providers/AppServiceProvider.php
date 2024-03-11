@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Footer;
 use App\Models\Page;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -31,5 +32,6 @@ class AppServiceProvider extends ServiceProvider
         });
         View::share('dates', date("Y-m-d",strtotime("2023-11-08")));
         View::share('links', Page::select(['id','name','url'])->where('active',1)->get());
+        View::share('footerLinks', Footer::select(['id','link','url','position'])->where('active',1)->get());
     }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\All;
 
+use App\Handler\AllHandler;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\All\ValidateCheckMailRequest;
 use App\Http\Requests\All\ValidateEntranceRequest;
@@ -17,35 +18,35 @@ class LoginController extends Controller
     public function store(ValidateEntranceRequest $request)
     {
         $login = User::select('id', 'name', 'email', 'password', 'active', 'balance', 'status','avatar')->where('email', '=', $request->input('email'))->orderBy('id', 'ASC')->first();
-        return user_entrance($login,$request);
+        return AllHandler::userEntrance($login,$request);
     }
 
     public function forget(){
-        return view('login.forget');
+        return view('all.login.forget');
     }
 
     public function checkMail(ValidateCheckMailRequest $request){
         $validate = $request->validated();
         $check = User::select('email','id')->where('email', $validate['email'])->orderBy('id','ASC')->first();
-        return send_mail($check,$validate);
+        return AllHandler::sendMail($check,$validate);
     }
 
     public function check(){
-        return view('login.check');
+        return view('all.login.check');
     }
 
     public function checkCode(Request $request)
     {
-        return check_code($request);
+        return AllHandler::checkCode($request);
     }
 
     public function change($id){
-        return view('login.change',compact('id'));
+        return view('all.login.change',compact('id'));
     }
 
     public function changePass(Request $request){
         $change = User::find((int)$request->id);
-        return change_pass($change,$request);
+        return AllHandler::changePass($change,$request);
     }
 
     /*public function closeSession(){

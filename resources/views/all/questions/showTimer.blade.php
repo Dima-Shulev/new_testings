@@ -35,14 +35,19 @@
 @section('content.page')
     @php($answers = all_answers($getQuest->trueAnswers,$getQuest->falseAnswers))
     @php($show_answers = show_answers($getQuest->testing_id))
-    <div class="timer">
-        <div class="timer__items">
-            <div class="timer__item timer__hours">00</div>
-            <div class="timer__item timer__minutes">00</div>
-            <div class="timer__item timer__seconds">00</div>
+    <div class="d-flex justify-content-around align-items-center m-1 p-1">
+        <div class="timer">
+            <div class="timer__items">
+                <div class="timer__item timer__hours">00</div>
+                <div class="timer__item timer__minutes">00</div>
+                <div class="timer__item timer__seconds">00</div>
+            </div>
+        </div>
+        <div class="numberQuest">
+            <h4>{{__(' Осталось вопросов ').$count--}}</h4>
         </div>
     </div>
-    <form action="{{route('question.store',[$getQuest->testing_id, $getQuest->id])}}" method="post">
+    <form action="{{route('question.store',[$getQuest->testing_id, $count])}}" method="post">
         @csrf
         <div class="questions">
             <x-card.card-body>

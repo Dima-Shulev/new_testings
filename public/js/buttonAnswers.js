@@ -21,7 +21,7 @@ buttonQuestion.addEventListener('click', (event) => {
         }
         setTimeout(() => {
             nextQuestion.click()
-        }, 5000)
+        }, 2500)
     }else if(checkFlag === "str") {
         const checkRadio = document.querySelector('input[type=radio]:checked');
         const res = MD5(String(checkRadio.id));
@@ -39,6 +39,6 @@ buttonQuestion.addEventListener('click', (event) => {
         }
         setTimeout(() => {
             nextQuestion.click()
-        }, 5000)
+        }, 2500)
     }
 });

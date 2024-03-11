@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\All;
 
+use App\Handler\AllHandler;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\All\ValidateRegisterRequest;
 
@@ -11,6 +12,6 @@ class RegisterController extends Controller
     }
 
     public function store(ValidateRegisterRequest $request){
-        return register($request);
+        return AllHandler::register($request);
     }
 }

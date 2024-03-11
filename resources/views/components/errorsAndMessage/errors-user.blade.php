@@ -39,6 +39,18 @@
     @case($slot == 'error_update_page')
     {{ __('Упс. Ошибка при обновлении страницы !') }}
     @break
+    @case($slot == 'error_create_link_footer')
+    {{ __('Упс. Ошибка при создании ссылки в footer !') }}
+    @break
+    @case($slot == 'error_update_link_footer')
+    {{ __('Упс. Ошибка при обновлении ссылки в footer !') }}
+    @break
+    @case($slot == 'error_limit_create_testing')
+    {{ __('Упс. Ошибка Вы хотите превысить лимит более 10 на бесплатном тарифе !') }}
+    @break
+    @case($slot == 'error_update_testing_category')
+    {{ __('Упс. Ошибка Вы не выбрали категорию для теста!') }}
+    @break
     @case($slot == 'error_user_status')
     {{ __('Упс. Ошибка неверный статус !') }}
     @break

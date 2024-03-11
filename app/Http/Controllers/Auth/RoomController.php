@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Auth;
 
+use App\Handler\AuthHandler;
 use App\Http\Requests\Auth\ValidEditRequest;
 use App\Models\User;
 use App\Http\Controllers\Controller;
@@ -18,7 +19,7 @@ class RoomController extends Controller
     }
 
     public function update(ValidEditRequest $request,$id){
-        return update_user_room($request,$id);
+        return AuthHandler::updateUserRoom($request,$id);
     }
 
     public function balance(){
@@ -29,5 +30,4 @@ class RoomController extends Controller
          session()->flush();
          return redirect('/');
     }
-
 }

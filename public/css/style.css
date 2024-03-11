@@ -103,6 +103,16 @@
     width:85vw;
 }
 
+.numberQuest{
+    margin-top:45px;
+    padding-left:10px;
+    margin-bottom:10px;
+    font-family: fantasy;
+}
+.timer{
+    margin-bottom:10px;
+}
+
 .timer__items {
     display: flex;
     font-size: 48px;
@@ -128,4 +138,27 @@
     content: ':';
     position: absolute;
     right: -15px;
+}
+.warning{
+    background-color: greenyellow;
+    color: #0f5132;
+    border-radius: 6px;
+}
+.hrLine {
+    height:1px;
+    background-color: #31313d;
+}
+
+.footerLink{
+    margin:5px;
+    color: #ffffff;
+    font-family: fantasy;
+}
+.footerLk{
+    font-size: 18px;
+    color: #ffffff;
+    text-decoration: none;
+}
+.footerLk:hover{
+    color: #3d4852;
 }

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Handler\AdminHandler;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ValidUserRequest;
 use App\Models\User;
@@ -8,7 +9,7 @@ use App\Models\User;
 class UserController extends Controller
 {
     public function index(){
-        $users = page_paginate(5,User::class);
+        $users = AdminHandler::pagePaginate(5,User::class);
         return view('admin.user.index',compact('users'));
     }
 
@@ -19,12 +20,12 @@ class UserController extends Controller
 
     public function update(ValidUserRequest $request, $id){
         $result = $request->validated();
-        check_public_user($request,$result);
-        return update_user($id,$result);
+        AdminHandler::checkPublicUser($request,$result);
+        return AdminHandler::updateUser($id,$result);
     }
 
     public function publicUser($id,$active){
-        public_item($id,$active,User::class);
+        AdminHandler::publicItem($id,$active,User::class);
         return redirect()->route('admin.users');
     }
 

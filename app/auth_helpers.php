@@ -62,7 +62,6 @@ if(! function_exists('all_answers')){
                 $allTrue = $trueAnswers;
                 $allAll[] = $trueAnswers;
             }
-
             if(strpos($falseAnswers,',')) {
                 $falseAnswers = explode(',', $falseAnswers);
                 foreach ($falseAnswers as $falseAn) {

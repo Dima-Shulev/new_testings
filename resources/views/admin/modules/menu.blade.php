@@ -7,16 +7,17 @@
         </a>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
-           {{-- <li>
-                <a href="{{route('admin.modules')}}" class="nav-link text-white">
-                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="{{route('admin.modules')}}"></use></svg>
-                    {{__('Модули')}}
-                </a>
-            </li>--}}
+
             <li>
                 <a href="{{route('admin.pages')}}" class="nav-link text-white">
                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="{{route('admin.pages')}}"></use></svg>
-                    {{__('Страницы')}}
+                    {{__('Меню')}}
+                </a>
+            </li>
+             <li>
+                <a href="{{route('admin.footer')}}" class="nav-link text-white">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="{{route('admin.footer')}}"></use></svg>
+                    {{__('Подвал(Ссылки)')}}
                 </a>
             </li>
             <li>

@@ -33,6 +33,15 @@
         @case($slot == 'create_page')
         {{ __('Поздравляю. Вы создали новую страницу !') }}
         @break
+        @case($slot == 'update_page')
+        {{ __('Поздравляю. Вы обновили страницу !') }}
+        @break
+        @case($slot == 'create_link_footer')
+        {{ __('Поздравляю. Вы создали новую ссылку в footer !') }}
+        @break
+        @case($slot == 'update_link_footer')
+        {{ __('Поздравляю. Вы обновили ссылку в footer !') }}
+        @break
         @case($slot == 'create_review')
         {{ __('Большое спасибо за Ваш отзыв !') }}
         @break
@@ -42,8 +51,6 @@
         @case($slot == 'exit_room')
         {{ __('Поздравляю. Вы вышли из кабинета !') }}
         @break
-        @case($slot == 'update_page')
-        {{ __('Поздравляю. Вы обновили страницу !') }}
-        @break
+
     @endswitch
 </div>

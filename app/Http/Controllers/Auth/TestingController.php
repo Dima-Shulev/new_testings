@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Auth;
 
+use App\Handler\AuthHandler;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\All\ValidTestingRequest;
 use App\Models\Category;
@@ -17,7 +18,11 @@ class TestingController extends Controller
     public function index($id)
     {
         $testings = Testing::where('user_id',(int)$id)->orderBy('id','DESC')->get();
-        return view('auth.testing.index',compact('testings','id'));
+        if($testings != null){
+            return view('auth.testing.index',compact('testings','id'));
+        }else{
+            return abort(404);
+        }
     }
     /**
      * Show the form for creating a new resource.
@@ -35,18 +40,21 @@ class TestingController extends Controller
      */
     public function store($id, ValidTestingRequest $request)
     {
-        return create_testing($request,$id);
+        return AuthHandler::createTestingAuth($request,$id);
     }
     /**
      * Show the form for editing the specified resource
      */
     public function edit(string $id)
     {
+        $categories = Category::select(['id','name'])->orderBY('id','ASC')->get();
         $testing = Testing::select(['id', 'name_test', 'content', 'passing_score', 'created_at', 'user_id'])->where('id', (int)$id)->first();
+        if($testing == null) {return abort(404);}
         $questions = Question::where('testing_id', (int)$id)->get();
+        if($questions == null) {return abort(404);}
         $count = Question::where('testing_id', (int)$id)->count('id');
         $userId = $testing->user_id;
-        return view('auth.testing.edit',compact('testing','questions','count','userId'));
+        return view('auth.testing.edit',compact('testing','questions','count','userId','categories'));
     }
     /**
      * Update the specified resource in storage.
@@ -54,12 +62,15 @@ class TestingController extends Controller
     public function update(ValidTestingRequest $request, string $id){
         $result = $request->validated();
         $getUser = Testing::select(['user_id'])->where('id',$id)->first();
-        return update_testing_auth($result, $id, $getUser->user_id);
+        if($getUser != null) {
+            return AuthHandler::updateTestingAuth($result, $id, $getUser->user_id);
+        }else{
+            return abort(404);
+        }
     }
 
-
     public function publicTesting($id, $active, $userId){
-        public_item($id, $active,Testing::class);
+        AuthHandler::publicItem($id, $active,Testing::class);
         $id = $userId;
         return redirect()->route('auth.testing',['id'=>$id]);
     }

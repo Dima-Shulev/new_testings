@@ -10,7 +10,7 @@
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
             @foreach($links as $page)
                 <li class="nav-item">
-                    <a class="nav-link {{ active_link($page->url) }}" aria-current="page" href="{{route("show",[$page->url])}}">{{$page->name}}</a>
+                    <a class="nav-link {{ \App\Handler\AllHandler::activeLink($page->url) }}" aria-current="page" href="{{route("show",[$page->url])}}">{{$page->name}}</a>
                 </li>
             @endforeach
         </ul>

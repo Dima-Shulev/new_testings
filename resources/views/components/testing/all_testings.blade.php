@@ -1,5 +1,5 @@
 @if($allTestings->isEmpty())
-    <p>{{__('Нет ни одной созданной категории')}}</p>
+    <p>{{__('Нет ни одного созданного теста')}}</p>
 @else
     <div class="row">
         @foreach($allTestings as $test)

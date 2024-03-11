@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\FooterController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\TestingController;
@@ -34,6 +35,20 @@ Route::prefix('admin')->middleware('adminPanel')->group(function () {
             Route::delete('/{id}/deletePage','deletePage')->name('admin.pages.delete');
         });
     });
+
+    Route::prefix('footer')->group(function() {
+        Route::controller(FooterController::class)->group(function(){
+            Route::get('/','index')->name('admin.footer');
+            Route::get('/create','create')->name('admin.footer.create');
+            Route::post('/','store')->name('admin.footer.store');
+            Route::get('/{url}/edit','edit')->name('admin.footer.edit');
+            Route::post('/{id}','update')->name('admin.footer.update');
+            Route::get('/{id}/active/{active}','publicFooter')->name('admin.footer.publicFooter');
+            Route::delete('/{id}/deleteFooter','deleteFooter')->name('admin.footer.delete');
+        });
+    });
+
+
 
     Route::prefix('categories')->group(function() {
         Route::controller(CategoryController::class)->group(function () {

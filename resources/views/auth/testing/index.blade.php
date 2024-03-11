@@ -4,6 +4,9 @@
     <div class="LC">
     <h1 class="h4">{{__('Все мои тесты:')}}</h1>
     <a href="{{route('auth.testing.create',$id)}}" class="btn btn-sm btn-primary m-2">{{__('Создать новый тест')}}</a>
+    @if(\App\Handler\AuthHandler::warningTest($id) === "no")
+        <x-errorsAndMessage.warningTest />
+    @endif
     <div class="form-control">
         @if(count($testings) > 0)
             <table class="table">
@@ -15,7 +18,6 @@
                 </tr>
                 @foreach($testings as $test)
                 <tr>
-                       {{-- <td>{{$test->id}}</td>--}}
                         <td>{{$test->name_test}}</td>
                         <td>{{$test->created_at}}</td>
                         <td>{{$test->active}}</td>

@@ -303,7 +303,6 @@ if(! function_exists('update_user')) {
             $idQuest = Question::select('id')->where('testing_id',(int)$id)->orderBy('id','ASC')->get();
             $show_answers = !isset($result['show_answers'])?"off":$result['show_answers'];
             $time = !isset($request['time']) ? 0 : $request['time'];
-
             if ($result) {
                 $update = Testing::find((int)$id);
                 $update->name_test = $result['name_test'];

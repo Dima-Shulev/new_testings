@@ -1,5 +1,7 @@
 <?php
+
 use App\Http\Controllers\All\CategoryController;
+use App\Http\Controllers\All\FooterController;
 use App\Http\Controllers\All\LoginController;
 use App\Http\Controllers\All\PageController;
 use App\Http\Controllers\All\QuestionController;
@@ -37,12 +39,12 @@ Route::prefix('testing')->group(function() {
     Route::get('/', [TestingController::class, 'index'])->name('testing');
     Route::get('/{id}/show', [TestingController::class, 'show'])->name('testing.show');
     Route::get('/{id}/question', [QuestionController::class, 'index'])->name('question');
-    Route::get('/{id}/question/{questId}', [QuestionController::class, 'show'])->name('question.show');
-    Route::get('/{id}/question/{questId}/hour/{hour}/minute/{minute}/second/{second}', [QuestionController::class, 'showTimer'])->name('question.showTimer');
+    Route::get('/{id}/question/{questId}/count/{count}', [QuestionController::class, 'show'])->name('question.show');
+    Route::get('/{id}/question/{questId}/count/{count}/hour/{hour}/minute/{minute}/second/{second}', [QuestionController::class, 'showTimer'])->name('question.showTimer');
     Route::post('/{id}/question/{questId}', [QuestionController::class, 'store'])->name('question.store');
     Route::get('/{id}/result/{count}', [TestingController::class, 'result'])->name('testing.result');
 });
-
+//question/{questId}/
 Route::middleware('guest')->group(function() {
     Route::get('/register', [RegisterController::class, 'index'])->name('register');
     Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
@@ -55,3 +57,7 @@ Route::middleware('guest')->group(function() {
     Route::get('/login/change/{id}', [LoginController::class, 'change'])->name('login.change');
     Route::post('/login/change', [LoginController::class, 'changePass'])->name('login.changePass');
 });
+
+Route::get('/links/{url}',[FooterController::class,'show'])->name('footer.show');
+
+

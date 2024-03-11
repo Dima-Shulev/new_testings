@@ -7,8 +7,24 @@
     </x-form.title>
     <hr>
     <x-card.card>
-        <a href="{{route('auth.testing',$userId)}}" class="btn btn-primary mb-2">{{__("Назад")}}</a>
+        <div class="d-flex justify-content-end">
+            <a href="{{route('auth.testing',$userId)}}" class="btn btn-primary mb-2">{{__("Назад")}}</a>
+        </div>
         <x-form.form action="{{route('auth.testing.update',$testing->id)}}" method="post">
+            <x-card.card-body>
+                <x-form.label>
+                    <b>{{__('Категория:')}}<i class="necessarily">*</i></b>
+                </x-form.label>
+                <select name="category" id="category">
+                    @if(!$categories->isEmpty())
+                        <option value="-/-">-/-</option>
+                        @foreach($categories as $category)
+                            <option value="{{$category->id}}">{{$category->name}}</option>
+                        @endforeach
+                    @endif
+                </select>
+            </x-card.card-body>
+            <hr>
             <x-card.card-body>
                 <x-form.label>
                     <b>{{__('Название:')}}</b>

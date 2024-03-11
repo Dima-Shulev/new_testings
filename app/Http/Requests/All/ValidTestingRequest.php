@@ -31,7 +31,8 @@ class ValidTestingRequest extends FormRequest
             'description' => ['required'],
             'created_at' => ['nullable','data'],
             'show_answers' => ['nullable','string'],
-            'time' => ['nullable','int']
+            'time' => ['nullable','int'],
+            'category' => ['required','string']
         ];
     }
 }

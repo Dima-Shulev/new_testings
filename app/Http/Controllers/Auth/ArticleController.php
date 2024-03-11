@@ -1,13 +1,12 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Article;
+/*use App\Models\Article;*/
 
 class ArticleController extends Controller
 {
-    public function index(){
+    /*public function index(){
         $articles = page_paginate(5,Article::class);
         return view('articles.index',compact('articles'));
     }
@@ -19,5 +18,5 @@ class ArticleController extends Controller
             $title = $article->title;
         }
         return view('articles.show',compact('showArticles','title'));
-    }
+    }*/
 }

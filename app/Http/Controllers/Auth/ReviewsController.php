@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\Review;
+/*use App\Models\Review;*/
 use Illuminate\Http\Request;
-use App\Http\Requests\CheckReviewsRequest;
+/*use App\Http\Requests\CheckReviewsRequest;*/
 use App\Models\User;
 use App\Http\Controllers\Controller;
 
 
 class ReviewsController extends Controller
 {
-    public function index(){
+    /*public function index(){
         $allReviews = page_paginate(5,Review::class);
         return view('auth.reviews.index',compact('allReviews'));
     }
@@ -38,6 +38,6 @@ class ReviewsController extends Controller
 
     public function like($post, Request $request){
         return like_review($request,$post);
-    }
+    }*/
 
 }

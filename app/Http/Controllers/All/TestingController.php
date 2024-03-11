@@ -13,15 +13,20 @@ class TestingController extends Controller
         return view('testings.index', compact('allTestings'));
     }
 
-    public function show($id){
+    public function show($id)
+    {
         session()->put('result', 0);
         $test = Testing::find((int)$id)->first();
-        if (isset($yesPassed)) {
-            return view('all.testings.show',['id'=>$id,compact('test', 'yesPassed')]);
-        } else if (isset($notPassed)) {
-            return view('all.testings.show', compact('test', 'notPassed'));
-        } else {
-            return view('all.testings.show', compact('test'));
+        if(isset($test) && $test != null){
+            if (isset($yesPassed)) {
+                return view('all.testings.show',['id'=>$id,compact('test', 'yesPassed')]);
+            } else if (isset($notPassed)) {
+                return view('all.testings.show', compact('test', 'notPassed'));
+            } else {
+                return view('all.testings.show', compact('test'));
+            }
+        }else{
+            return abort(404);
         }
     }
 
@@ -29,19 +34,21 @@ class TestingController extends Controller
     public function result($id, $count)
     {
         $math = Testing::find((int)$id);
-        $percentGo = $math->passing_score;
-        $percent = (100 / $count) * session('result');
+        if(isset($math->passing_score) && $math->passing_score != null){
+            $name = $math->name_test;
+            $percentGo = $math->passing_score;
+            $percent = (100 / $count) * session('result');
 
-        $yesPassed = "Поздравляю, Вы прошли тест. Ваш результат - ";
-        $notPassed = "Увы, но Вы не прошли тест. Ваш результат - ";
+            if ((int)$math->passing_score <= (int)$percent) {
+                $yesPassed = round($percent);
+                return view('all.testings.result', compact('yesPassed','percentGo','name'));
 
-        if ((int)$math->passing_score <= (int)$percent) {
-            $yesPassed .= $percent . "%";
-            return view('all.testings.result', compact('yesPassed','percentGo'));
-
-        } else if ((int)$math->passing_score > (int)$percent) {
-            $notPassed .= $percent . "%";
-            return view('all.testings.result', compact('notPassed','percentGo'));
+            } else if ((int)$math->passing_score > (int)$percent) {
+                $notPassed = round($percent);
+                return view('all.testings.result', compact('notPassed','percentGo','name'));
+            }
+        }else{
+            return abort(404);
         }
     }
 }

@@ -1,20 +1,19 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Handler\AdminHandler;
 use App\Http\Controllers\Controller;
-
 use App\Http\Requests\Admin\ValidateCategory;
 use App\Models\Question;
 use App\Models\Category;
-
 use App\Models\Testing;
 use Illuminate\Http\Request;
 
-
 class CategoryController extends Controller
 {
-    public function index(Request $request){
-        $categories = page_paginate(5,Category::class);
+    public function index(Request $request)
+    {
+        $categories = AdminHandler::pagePaginate(5,Category::class);
         return view('admin.categories.index',compact('categories'));
     }
 
@@ -30,7 +29,7 @@ class CategoryController extends Controller
 
     public function store(ValidateCategory $request){
         $result = $request->validated();
-        return create_category($result);
+        return AdminHandler::createCategory($result);
     }
 
     public function edit($url){
@@ -41,7 +40,7 @@ class CategoryController extends Controller
     public function update($id, ValidateCategory $request){
         $result = $request->validated();
         $result['checkPublic'] = checkPublic($request,$result);
-        return update_category($result,$id);
+        return AdminHandler::updateCategory($result,$id);
     }
 
     public function publicCategory($id,$active){

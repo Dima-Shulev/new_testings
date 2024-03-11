@@ -3,7 +3,10 @@
 @section('content.page')
 @php($answers = all_answers($getQuest->trueAnswers,$getQuest->falseAnswers))
 @php($show_answers = show_answers($getQuest->testing_id))
-    <form action="{{route('question.store',[$getQuest->testing_id, $getQuest->id])}}" method="post">
+    <div class="numberQuest">
+        <h4>{{__(' Осталось вопросов ').$count--}}</h4>
+    </div>
+    <form action="{{route('question.store',[$getQuest->testing_id, $count])}}" method="post">
         @csrf
         <div class="questions">
             <x-card.card-body>

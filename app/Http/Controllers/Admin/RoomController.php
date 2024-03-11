@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Handler\AdminHandler;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ValidEntranceRoomRequest;
 use App\Models\Category;
@@ -15,15 +16,15 @@ class RoomController extends Controller
     public function entrance(ValidEntranceRoomRequest $request){
         $checkVal = $request->validated();
         $checkName = User::where('name',$checkVal['name'])->where('status','admin')->first();
-        return check_entrance_room($checkName,$checkVal);
+        return AdminHandler::checkEntranceRoom($checkName,$checkVal);
     }
 
     public function index(){
-            $showLastUser = select_last(User::class,'name','active','created_at');
+            $showLastUser = AdminHandler::selectLast(User::class,'name','active','created_at');
             $countUser = User::count();
-            $showLastCategory = select_last(Category::class,'name','active','created_at');
+            $showLastCategory = AdminHandler::selectLast(Category::class,'name','active','created_at');
             $countCategory = Category::count();
-            $showLastTesting = select_last(Testing::class,'name_test','active','created_at');
+            $showLastTesting = AdminHandler::selectLast(Testing::class,'name_test','active','created_at');
             $countTesting = Testing::count();
 
             $countAndShow = [
